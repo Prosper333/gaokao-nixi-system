@@ -1,0 +1,821 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>暑假逆袭｜高考学习问题解决系统</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080908;
+      --panel: #111412;
+      --panel-2: #171b18;
+      --ink: #f4f1e8;
+      --muted: #b8b4aa;
+      --soft: #807a70;
+      --line: rgba(244, 241, 232, .16);
+      --red: #d3382f;
+      --red-dark: #8f1d18;
+      --gold: #d7ad67;
+      --green: #7cae8a;
+      --cream: #fff7df;
+      --shadow: 0 24px 80px rgba(0, 0, 0, .38);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.72;
+      letter-spacing: 0;
+    }
+
+    a { color: inherit; }
+
+    .site-shell {
+      min-height: 100vh;
+      background:
+        linear-gradient(180deg, rgba(8, 9, 8, .96), rgba(8, 9, 8, .9)),
+        radial-gradient(circle at 70% 0%, rgba(211, 56, 47, .18), transparent 34%);
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(244, 241, 232, .12);
+      background: rgba(8, 9, 8, .78);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      width: min(1160px, calc(100% - 40px));
+      min-height: 64px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(211, 56, 47, .76);
+      background: linear-gradient(135deg, var(--red-dark), var(--red));
+      box-shadow: 0 12px 30px rgba(211, 56, 47, .24);
+      font-size: 15px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+    }
+
+    .section {
+      border-bottom: 1px solid var(--line);
+      padding: 86px 0;
+    }
+
+    .wrap {
+      width: min(1160px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      min-height: calc(100vh - 64px);
+      display: grid;
+      align-items: center;
+      padding: 72px 0 48px;
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(300px, .72fr);
+      gap: 54px;
+      align-items: center;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      color: var(--gold);
+      font-weight: 800;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 34px;
+      height: 3px;
+      background: var(--red);
+      display: inline-block;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 830px;
+      margin-bottom: 26px;
+      font-size: clamp(43px, 6.5vw, 82px);
+      line-height: 1.04;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      max-width: 850px;
+      margin-bottom: 20px;
+      font-size: clamp(30px, 4.2vw, 52px);
+      line-height: 1.12;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 21px;
+      line-height: 1.3;
+    }
+
+    .lead {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 21px;
+    }
+
+    .highlight {
+      color: var(--cream);
+      box-shadow: inset 0 -0.28em 0 rgba(211, 56, 47, .42);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .btn {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      padding: 12px 18px;
+      border: 1px solid rgba(244, 241, 232, .28);
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 800;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(244, 241, 232, .48);
+    }
+
+    .btn.primary {
+      border-color: var(--red);
+      background: linear-gradient(135deg, var(--red-dark), var(--red));
+      box-shadow: 0 18px 46px rgba(211, 56, 47, .24);
+    }
+
+    .proof-panel {
+      background: linear-gradient(180deg, rgba(23, 27, 24, .98), rgba(15, 17, 15, .98));
+      border: 1px solid rgba(244, 241, 232, .14);
+      border-radius: 8px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .proof-title {
+      color: var(--gold);
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .metric-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .metric {
+      border-left: 3px solid var(--red);
+      padding: 4px 0 4px 14px;
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--cream);
+      font-size: 27px;
+      line-height: 1.1;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .intro-grid,
+    .cards-3,
+    .cards-4 {
+      display: grid;
+      gap: 16px;
+      margin-top: 30px;
+    }
+
+    .intro-grid {
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
+      align-items: start;
+      gap: 34px;
+    }
+
+    .cards-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .cards-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .card {
+      min-height: 168px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      background: var(--panel);
+    }
+
+    .card p,
+    .copy p {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .number {
+      color: var(--red);
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .quote-band {
+      margin-top: 32px;
+      padding: 24px;
+      border-left: 4px solid var(--red);
+      background: rgba(211, 56, 47, .08);
+      color: var(--cream);
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .system-map {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .map-item {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      border: 1px solid rgba(244, 241, 232, .14);
+      border-radius: 8px;
+      padding: 16px;
+      background: rgba(255, 247, 223, .04);
+      font-weight: 800;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, .72fr);
+      gap: 34px;
+      align-items: start;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .timeline-row {
+      display: grid;
+      grid-template-columns: 130px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .timeline-row strong {
+      color: var(--gold);
+      font-size: 23px;
+      line-height: 1.1;
+    }
+
+    .timeline-row p { color: var(--muted); margin-bottom: 0; }
+
+    .course-map {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .map-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel-2);
+      padding: 22px;
+    }
+
+    .map-card ul {
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .map-card li { margin: 6px 0; }
+
+    .course-panel {
+      border-radius: 8px;
+      border: 1px solid rgba(211, 56, 47, .42);
+      background: linear-gradient(180deg, rgba(143, 29, 24, .28), rgba(17, 20, 18, .98));
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .video-panel {
+      overflow: hidden;
+      padding: 0;
+      background: #030403;
+    }
+
+    .video-panel video {
+      display: block;
+      width: 100%;
+      max-height: min(72vh, 620px);
+      background: #000;
+    }
+
+    .video-caption {
+      padding: 18px 22px 20px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .course-outline {
+      display: grid;
+      gap: 0;
+      margin: 20px 0 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .course-outline div {
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr);
+      gap: 12px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .course-outline strong {
+      color: var(--gold);
+      font-size: 14px;
+    }
+
+    .purchase-note {
+      margin: 18px 0 0;
+      padding: 15px 16px;
+      border-left: 3px solid var(--gold);
+      background: rgba(215, 173, 103, .08);
+      color: var(--cream);
+      font-weight: 700;
+    }
+
+    .price {
+      margin: 8px 0 18px;
+      color: var(--gold);
+      font-size: 52px;
+      line-height: 1;
+      font-weight: 950;
+    }
+
+    .list {
+      margin: 16px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .list li { margin: 8px 0; }
+
+    .qr-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      gap: 30px;
+      align-items: center;
+      margin-top: 28px;
+    }
+
+    .qr {
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 10px;
+      width: 100%;
+      max-width: 260px;
+      justify-self: end;
+    }
+
+    .qr img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+
+    .fineprint {
+      margin-top: 18px;
+      color: var(--soft);
+      font-size: 14px;
+    }
+
+    footer {
+      padding: 34px 0;
+      color: var(--soft);
+      font-size: 14px;
+    }
+
+    @media (max-width: 920px) {
+      .nav { width: min(100% - 28px, 1160px); }
+      .nav-links { display: none; }
+      .section { padding: 64px 0; }
+      .wrap { width: min(100% - 28px, 1160px); }
+      .hero-layout,
+      .intro-grid,
+      .split,
+      .qr-layout {
+        grid-template-columns: 1fr;
+      }
+      .cards-3,
+      .cards-4,
+      .course-map,
+      .system-map {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        min-height: auto;
+        padding: 52px 0 36px;
+      }
+      .lead { font-size: 18px; }
+      .timeline-row {
+        grid-template-columns: 1fr;
+      }
+      .qr {
+        justify-self: start;
+      }
+    }
+
+    @media (max-width: 520px) {
+      h1 { font-size: 40px; }
+      h2 { font-size: 30px; }
+      .actions { flex-direction: column; }
+      .btn { width: 100%; }
+      .proof-panel,
+      .course-panel,
+      .card,
+      .map-card {
+        padding: 18px;
+      }
+
+      .video-caption { padding: 16px 18px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <nav class="nav" aria-label="主导航">
+        <div class="brand">
+          <div class="brand-mark">逆</div>
+          <span>暑假逆袭</span>
+        </div>
+        <div class="nav-links">
+          <a href="#why">为什么补课没效果</a>
+          <a href="#system">高考系统</a>
+          <a href="#free">免费课</a>
+          <a href="#paid">第一节课</a>
+          <a href="#contact">领取表格</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="wrap hero-layout">
+          <div>
+            <p class="kicker">高考学习问题解决系统</p>
+            <h1>不是再报一个班，而是学会<span class="highlight">自己解决问题</span>。</h1>
+            <p class="lead">补习班能带你学一批知识点，但高考真正考验的是：离开老师之后，你会不会自己学、自己复习、自己处理一个新的问题。</p>
+            <div class="actions">
+              <a class="btn primary" href="#free">免费看《问题解决流程》</a>
+              <a class="btn" href="#paid">了解 ¥19.9 第一节课</a>
+            </div>
+          </div>
+
+          <aside class="proof-panel" aria-label="个人经历摘要">
+            <div class="proof-title">我搭起来的不是技巧清单，而是自己的学习系统</div>
+            <div class="metric-list">
+              <div class="metric">
+                <strong>235 天</strong>
+                <span>高三持续复盘、分析、解决自己的问题</span>
+              </div>
+              <div class="metric">
+                <strong>100+ 分</strong>
+                <span>高三一整年总分提升超过 100 分</span>
+              </div>
+              <div class="metric">
+                <strong>63 → 103</strong>
+                <span>数学一模 63，高考 103，提升 40 分</span>
+              </div>
+              <div class="metric">
+                <strong>英语 136</strong>
+                <span>2025 新高考 I 卷英语 136 分</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="why">
+        <div class="wrap">
+          <p class="kicker">旧方案为什么失效</p>
+          <h2>补习班解决的是“有人带你学”，但高考真正考验的是“你自己会不会学”。</h2>
+          <div class="intro-grid">
+            <div class="copy">
+              <p>补习班不是完全没用。它本质上是找一个老师，带着一群学生去学同一批知识点。如果老师水平高、学生足够聪明、课后还能复习，这当然可能有效。</p>
+              <p>但大多数普通学生真正卡住的地方，不是“有没有人讲一遍”，而是离开老师之后怎么办。</p>
+            </div>
+            <div class="quote-band">家长花钱求安心，学生上课做样子。真正的问题，没有被发现，也没有被解决。</div>
+          </div>
+
+          <div class="cards-4">
+            <div class="card">
+              <div class="number">01</div>
+              <h3>老师水平参差不齐</h3>
+              <p>讲得好不好，很大程度看运气。</p>
+            </div>
+            <div class="card">
+              <div class="number">02</div>
+              <h3>所有人听同一套内容</h3>
+              <p>但每个学生真正卡住的地方并不一样。</p>
+            </div>
+            <div class="card">
+              <div class="number">03</div>
+              <h3>学生不知道自己的问题</h3>
+              <p>像大海捞针一样听课，听到什么算什么。</p>
+            </div>
+            <div class="card">
+              <div class="number">04</div>
+              <h3>课后不会复习，也不会重学</h3>
+              <p>假期结束、离开老师之后，遇到新知识点或忘掉的旧知识点，还是不知道怎么重新学会。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap split">
+          <div>
+            <p class="kicker">真正该补的能力</p>
+            <h2>不只是知识点，而是从零学会一个知识点的能力。</h2>
+            <p class="lead">高三复习里更常见的情况是：以前学过，现在忘了；老师讲过，自己做还是不会；题目涉及好几个知识点，不知道从哪里补。</p>
+          </div>
+          <div class="card">
+            <h3>如果你只会等老师讲</h3>
+            <p>你会一直被别人牵着走。真正主动的学习，是掌握一套从零学习、复习、拆解、训练的方法。遇到不会的东西，知道怎么拆开，怎么补回来，怎么练到能用。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="system">
+        <div class="wrap">
+          <p class="kicker">高考是完整系统</p>
+          <h2>高考不是只考知识点，它是在考你整个系统。</h2>
+          <p class="lead">它还考你的复习系统、刷题反馈、时间安排、身体状态、睡眠状态、考试心态，甚至还考你能不能处理好同学、老师、家长带来的干扰。</p>
+          <div class="system-map">
+            <div class="map-item">知识点掌握</div>
+            <div class="map-item">复习与遗忘</div>
+            <div class="map-item">刷题与错题</div>
+            <div class="map-item">时间管理</div>
+            <div class="map-item">睡眠与身体状态</div>
+            <div class="map-item">考试策略</div>
+            <div class="map-item">心态稳定</div>
+            <div class="map-item">人际与环境干扰</div>
+          </div>
+          <div class="quote-band">我的课程不会只讲“某一道题怎么做”。我更想帮你建立一套高考系统。</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap split">
+          <div>
+            <p class="kicker">我做到了什么</p>
+            <h2>我高三真正搭起来的，是自己的学习系统。</h2>
+            <p class="lead">这些经历让我相信，高三最重要的不是再找一个人喂答案，而是把自己的系统搭起来。</p>
+          </div>
+          <div class="timeline">
+            <div class="timeline-row">
+              <strong>235 天</strong>
+              <p>每天复盘、分析、解决自己遇到的问题。</p>
+            </div>
+            <div class="timeline-row">
+              <strong>100+ 分</strong>
+              <p>高三一整年总分提升超过 100 分。</p>
+            </div>
+            <div class="timeline-row">
+              <strong>63 → 103</strong>
+              <p>数学一模 63 分，考试经常写不完；后来用 100 多天搭建考试系统，高考数学 103 分。</p>
+            </div>
+            <div class="timeline-row">
+              <strong>英语 136</strong>
+              <p>英语长期稳定 130 分以上，2025 年新高考 I 卷英语 136 分。</p>
+            </div>
+            <div class="timeline-row">
+              <strong>长期自驱</strong>
+              <p>从高二下学期清明节开始到高考，几乎每天都去学校，这是我自己对自己的要求。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <p class="kicker">未来课程地图</p>
+          <h2>后面的课，会围绕一套完整的高考系统展开。</h2>
+          <p class="lead">这些方法不是为了堆名词，而是分别解决高考系统里的不同板块。你哪里出问题，就先学哪里。</p>
+
+          <div class="course-map">
+            <div class="map-card">
+              <h3>问题解决系统</h3>
+              <ul>
+                <li>五步解决问题流程</li>
+                <li>三个为什么追问法</li>
+                <li>问题反馈表</li>
+              </ul>
+            </div>
+            <div class="map-card">
+              <h3>时间与任务系统</h3>
+              <ul>
+                <li>时间分块法</li>
+                <li>效率笔记本</li>
+                <li>保底任务 / 附加任务</li>
+              </ul>
+            </div>
+            <div class="map-card">
+              <h3>知识点重学系统</h3>
+              <ul>
+                <li>逆向重构法</li>
+                <li>五分定位法</li>
+                <li>AI 刷题法</li>
+              </ul>
+            </div>
+            <div class="map-card">
+              <h3>刷题与错题系统</h3>
+              <ul>
+                <li>五层错题库</li>
+                <li>三色笔刷题法</li>
+                <li>秒表刷题法 / 秒表刷卷法</li>
+              </ul>
+            </div>
+            <div class="map-card">
+              <h3>熟练度与提分系统</h3>
+              <ul>
+                <li>行云流水训练</li>
+                <li>提分感塑造</li>
+                <li>ABC 三套卷策略</li>
+              </ul>
+            </div>
+            <div class="map-card">
+              <h3>状态与考试系统</h3>
+              <ul>
+                <li>早起与课堂清醒</li>
+                <li>紧急预案策略</li>
+                <li>心态稳定与环境干扰处理</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="free">
+        <div class="wrap split">
+          <div>
+            <p class="kicker">免费课</p>
+            <h2>《问题解决流程》：先学会把问题拆清楚。</h2>
+            <p class="lead">免费课先解决最底层的一件事：怎么把“我学不进去”“我戒不掉手机”“我总是拖延”这种模糊问题，拆成能解决的问题。</p>
+            <ul class="list">
+              <li>确定目标</li>
+              <li>明确问题</li>
+              <li>针对分析</li>
+              <li>制定策略</li>
+              <li>去做</li>
+              <li>三个为什么追问法</li>
+            </ul>
+          </div>
+          <div class="course-panel">
+            <div class="video-panel">
+              <video controls preload="metadata" playsinline aria-label="免费课：问题解决流程">
+                <source src="免费课_问题解决流程.mp4" type="video/mp4">
+                你的浏览器暂不支持视频播放。
+              </video>
+              <div class="video-caption">完整看完后，再加微信领取问题反馈表。先把自己的问题写清楚，才知道下一步该学什么。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="paid">
+        <div class="wrap split">
+          <div>
+            <p class="kicker">第一节付费课</p>
+            <h2>《早起第一节课》：早起不是目的，课堂清醒才是。</h2>
+            <p class="lead">这节课先解决一个最容易被感受到的具体问题：为什么你明明想努力，上课却越来越困。它不是鸡血式逼你早起，而是帮你把睡眠、早晨动作和课堂状态连成一个能执行的系统。</p>
+          </div>
+          <div class="course-panel">
+            <h3>早起与课堂清醒</h3>
+            <div class="price">¥19.9</div>
+            <p>购买后，我会在微信私信发送飞书课程链接，可以随时回看。</p>
+            <div class="course-outline" aria-label="课程框架">
+              <div><strong>01</strong><span>为什么越努力越困：白天低效、晚上补作业、第二天更困的恶性循环。</span></div>
+              <div><strong>02</strong><span>先把睡眠稳下来：作息、环境和身体状态如何影响第二天的清醒度。</span></div>
+              <div><strong>03</strong><span>如何早起：凉水法、自动化晨间流程，减少早晨反复做决定。</span></div>
+              <div><strong>04</strong><span>如何不因为失败放弃：三条命法和烂开始法，先不断，再加量。</span></div>
+            </div>
+            <p class="purchase-note">想购买或先问课程是否适合自己：加微信私信说明情况，确认后付款，我会发送飞书课程链接。</p>
+            <div class="actions">
+              <a class="btn primary" href="#wechat-qr">加微信购买 / 咨询</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <p class="kicker">后续课程预告</p>
+          <h2>下一节：时间管理。</h2>
+          <p class="lead">早起解决的是“白天能不能清醒”。下一节会讲：时间怎么安排，才不会越补越乱、越赶越崩。后面会继续拆错题、遗忘、考试系统、英语方法等模块。</p>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="wrap">
+          <p class="kicker">微信承接</p>
+          <h2>前 20 名领取问题反馈表，我可以免费帮你做一次问题诊断。</h2>
+          <div class="qr-layout">
+            <div>
+              <p class="lead">如果你说不清自己到底卡在哪里，可以先加微信领取问题反馈表。表里会让你写清：目标、具体问题、原因分析、尝试过的方法、三条策略、执行结果和后续反馈。</p>
+              <p class="lead">前 20 名把表格认真填完发给我，我可以免费帮你看一次：你真正的问题在哪里，下一步更适合先解决什么。</p>
+              <div class="actions">
+                <a class="btn primary" href="D:/IP成长之路/高考资料库/高考付费变现项目/免费课_问题解决流程PPT/微信图片_20260709103427_148_75.jpg">查看微信二维码</a>
+              </div>
+              <p class="fineprint">免费诊断限定为一次问题诊断，不承诺长期陪跑，也不承诺保证提分。</p>
+            </div>
+            <div class="qr" id="wechat-qr">
+              <img src="../免费课_问题解决流程PPT/微信图片_20260709103427_148_75.jpg" alt="微信二维码">
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <p>本页面为本地 MVP 承接页。所有课程以真实经历和方法拆解为主，不虚构身份，不承诺保证提分。</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
+
