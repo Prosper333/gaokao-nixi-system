@@ -384,6 +384,16 @@
       font-size: 14px;
     }
 
+    .video-fallback {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-left: 3px solid var(--gold);
+      background: rgba(215, 173, 103, .08);
+      color: var(--cream);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
     .course-outline {
       display: grid;
       gap: 0;
@@ -747,10 +757,13 @@
           <div class="course-panel">
             <div class="video-panel">
               <video controls preload="metadata" playsinline aria-label="免费课：问题解决流程">
-                <source src="免费课_问题解决流程.mp4" type="video/mp4">
+                <source src="free-course-mobile.mp4" type="video/mp4">
                 你的浏览器暂不支持视频播放。
               </video>
-              <div class="video-caption">完整看完后，再加微信领取问题反馈表。先把自己的问题写清楚，才知道下一步该学什么。</div>
+              <div class="video-caption">
+                完整看完后，再加微信领取问题反馈表。先把自己的问题写清楚，才知道下一步该学什么。
+                <div class="video-fallback">如果手机端视频加载慢，可以直接往下滑扫码加微信；免费课视频结尾也放了微信二维码。</div>
+              </div>
             </div>
           </div>
         </div>
@@ -798,12 +811,13 @@
               <p class="lead">如果你说不清自己到底卡在哪里，可以先加微信领取问题反馈表。表里会让你写清：目标、具体问题、原因分析、尝试过的方法、三条策略、执行结果和后续反馈。</p>
               <p class="lead">前 20 名把表格认真填完发给我，我可以免费帮你看一次：你真正的问题在哪里，下一步更适合先解决什么。</p>
               <div class="actions">
-                <a class="btn primary" href="D:/IP成长之路/高考资料库/高考付费变现项目/免费课_问题解决流程PPT/微信图片_20260709103427_148_75.jpg">查看微信二维码</a>
+                <a class="btn primary" href="wechat-qr.jpg">查看微信二维码</a>
               </div>
+              <p class="fineprint">如果免费视频在手机上加载慢，直接加微信也可以领取备用观看方式。免费课结尾同样有这个二维码。</p>
               <p class="fineprint">免费诊断限定为一次问题诊断，不承诺长期陪跑，也不承诺保证提分。</p>
             </div>
             <div class="qr" id="wechat-qr">
-              <img src="../免费课_问题解决流程PPT/微信图片_20260709103427_148_75.jpg" alt="微信二维码">
+              <img src="wechat-qr.jpg" alt="微信二维码">
             </div>
           </div>
         </div>
