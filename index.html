@@ -830,22 +830,6 @@
       </div>
     </footer>
   </div>
-    <script>
-      (function () {
-        if (navigator.doNotTrack === "1") return;
-        window.addEventListener("load", function () {
-          fetch("/api/analytics/track", {
-            method: "POST",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify({
-              path: location.pathname + location.search,
-              referrer: document.referrer || ""
-            }),
-            keepalive: true
-          }).catch(function () {});
-        });
-      })();
-    </script>
 </body>
 </html>
 
