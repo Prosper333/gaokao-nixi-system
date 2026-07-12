@@ -550,7 +550,7 @@
             <p class="lead">补习班能带你学一批知识点，但高考真正考验的是：离开老师之后，你会不会自己学、自己复习、自己处理一个新的问题。</p>
             <div class="actions">
               <a class="btn primary" href="#free">免费看《问题解决流程》</a>
-              <a class="btn" href="#paid">了解 ¥19.9 第一节课</a>
+              <a class="btn" href="#paid">了解 ¥9.9 第一节课</a>
             </div>
           </div>
 
@@ -778,7 +778,7 @@
           </div>
           <div class="course-panel">
             <h3>早起与课堂清醒</h3>
-            <div class="price">¥19.9</div>
+            <div class="price">¥9.9</div>
             <p>购买后，我会在微信私信发送飞书课程链接，可以随时回看。</p>
             <div class="course-outline" aria-label="课程框架">
               <div><strong>01</strong><span>为什么越努力越困：白天低效、晚上补作业、第二天更困的恶性循环。</span></div>
@@ -830,6 +830,22 @@
       </div>
     </footer>
   </div>
+    <script>
+      (function () {
+        if (navigator.doNotTrack === "1") return;
+        window.addEventListener("load", function () {
+          fetch("/api/analytics/track", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              path: location.pathname + location.search,
+              referrer: document.referrer || ""
+            }),
+            keepalive: true
+          }).catch(function () {});
+        });
+      })();
+    </script>
 </body>
 </html>
 
