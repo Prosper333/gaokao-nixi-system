@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>暑假逆袭｜高考学习问题解决系统</title>
+  <title>高中学习方法｜高考学习问题解决系统</title>
   <style>
     :root {
       color-scheme: dark;
@@ -398,6 +398,30 @@
       font-weight: 900;
     }
 
+    .course-label.recording {
+      border-color: rgba(143, 29, 24, .72);
+      color: #ffd7d2;
+      background: rgba(143, 29, 24, .32);
+    }
+
+    .course-panel.upcoming {
+      grid-column: 1 / -1;
+      border-color: rgba(215, 173, 103, .42);
+      background: linear-gradient(180deg, rgba(215, 173, 103, .12), rgba(17, 20, 18, .98));
+    }
+
+    .course-panel.upcoming .course-outline {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 22px;
+    }
+
+    .course-status {
+      margin: 12px 0 18px;
+      color: var(--gold);
+      font-size: 20px;
+      font-weight: 900;
+    }
+
     .price-offer {
       display: flex;
       flex-wrap: wrap;
@@ -549,6 +573,9 @@
       .qr-layout {
         grid-template-columns: 1fr;
       }
+
+      .course-panel.upcoming { grid-column: auto; }
+      .course-panel.upcoming .course-outline { grid-template-columns: 1fr; }
       .cards-3,
       .cards-4,
       .course-map,
@@ -582,6 +609,25 @@
 
       .video-caption { padding: 16px 18px 18px; }
     }
+    /* 2026-09: preserve the existing palette; improve navigation and reading. */
+    section[id], #wechat-qr { scroll-margin-top: 128px; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 5px; }
+    .nav-links a { padding: 10px 0; }
+    .nav-links a:hover { color: var(--ink); }
+    .lead { max-width: 60ch; }
+    .quick-paths { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .quick-paths a { border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; text-decoration: none; color: var(--muted); font-size: 14px; }
+    .quick-paths a:hover { border-color: var(--gold); color: var(--ink); background: var(--panel); }
+    .course-panel, .proof-panel { border-radius: 12px; }
+    .section h2 { max-width: 28em; text-wrap: balance; }
+    @media (max-width: 920px) {
+      .nav { flex-wrap: wrap; gap: 0; padding-top: 10px; }
+      .nav-links { display: flex; width: 100%; overflow-x: auto; white-space: nowrap; gap: 22px; padding-bottom: 4px; }
+      .nav-links a { flex-shrink: 0; }
+      .quick-paths a { flex: 1 1 140px; text-align: center; }
+    }
+    @media (max-width: 520px) { h1 { font-size: clamp(30px, 8.5vw, 40px); } h2 { font-size: 26px; } .section { padding: 44px 0; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   </style>
 </head>
 <body>
@@ -589,15 +635,15 @@
     <header class="topbar">
       <nav class="nav" aria-label="主导航">
         <div class="brand">
-          <div class="brand-mark">逆</div>
-          <span>暑假逆袭</span>
+          <div class="brand-mark">学</div>
+          <span>高中学习方法</span>
         </div>
         <div class="nav-links">
-          <a href="#why">为什么补课没效果</a>
-          <a href="#system">高考系统</a>
+          <a href="#why">学习问题</a>
+          <a href="#system">学习地图</a>
           <a href="#free">免费课</a>
           <a href="#paid">付费课程</a>
-          <a href="#contact">领取表格</a>
+          <a href="#contact">问题反馈</a>
         </div>
       </nav>
     </header>
@@ -606,12 +652,17 @@
       <section class="hero">
         <div class="wrap hero-layout">
           <div>
-            <p class="kicker">高考学习问题解决系统</p>
-            <h1>不是再报一个班，而是学会<span class="highlight">自己解决问题</span>。</h1>
-            <p class="lead">补习班能带你学一批知识点，但高考真正考验的是：离开老师之后，你会不会自己学、自己复习、自己处理一个新的问题。</p>
+            <p class="kicker">高中学习方法｜高考学习问题解决系统</p>
+            <h1>找到学习的卡点，<br><span class="highlight">一件一件解决。</span></h1>
+            <p class="lead">一轮被进度推着走、听懂却不会、作业写完就忘、考试写不完，表面上都是“学习问题”，但下一步并不一样。先判断问题，再选择方法。</p>
             <div class="actions">
-              <a class="btn primary" href="#free">免费看《问题解决流程》</a>
-              <a class="btn" href="#paid">按问题选择付费课</a>
+              <a class="btn primary" href="#free" data-track="free-entry">先看免费内容</a>
+              <a class="btn" href="#paid" data-track="course-entry">查看课程与进度</a>
+            </div>
+            <div class="quick-paths" aria-label="按当前问题直达">
+              <a href="#free">不知道问题在哪 →</a>
+              <a href="#paid">考试总写不完 →</a>
+              <a href="#system">想理清学习环节 →</a>
             </div>
           </div>
 
@@ -773,6 +824,14 @@
               </ul>
             </div>
             <div class="map-card">
+              <h3>复习与遗忘系统</h3>
+              <ul>
+                <li>《如何科学有效地复习》正在录制</li>
+                <li>用遗忘管理表安排长期回看</li>
+                <li>学会筛选、复习、检测与减量</li>
+              </ul>
+            </div>
+            <div class="map-card">
               <h3>刷题与错题系统</h3>
               <ul>
                 <li>五层错题库</li>
@@ -803,9 +862,9 @@
       <section class="section" id="free">
         <div class="wrap split">
           <div>
-            <p class="kicker">免费课</p>
-            <h2>《问题解决流程》：先学会把问题拆清楚。</h2>
-            <p class="lead">免费课先解决最底层的一件事：怎么把“我学不进去”“我戒不掉手机”“我总是拖延”这种模糊问题，拆成能解决的问题。</p>
+          <p class="kicker">免费内容</p>
+          <h2>《问题解决流程》：先把模糊的焦虑，拆成可以判断的问题。</h2>
+          <p class="lead">先判断你的问题主要发生在课堂、作业、复习还是考场。没有这个判断，换再多资料也容易只是换一种忙法。</p>
             <ul class="list">
               <li>确定目标</li>
               <li>明确问题</li>
@@ -822,8 +881,8 @@
                 你的浏览器暂不支持视频播放。
               </video>
               <div class="video-caption">
-                完整看完后，再加微信领取问题反馈表。先把自己的问题写清楚，才知道下一步该学什么。
-                <div class="video-fallback">如果手机端视频加载慢，可以直接往下滑扫码加微信；免费课视频结尾也放了微信二维码。</div>
+                完整看完后，把自己的问题写清楚，再判断下一步该先改哪一个环节。
+                <div class="video-fallback">手机端视频加载慢时，可先继续浏览本页的课程边界与问题反馈方式。</div>
               </div>
             </div>
           </div>
@@ -833,78 +892,90 @@
       <section class="section" id="paid">
         <div class="wrap">
           <div class="course-choice">
-            <p class="kicker">两节付费课｜按问题选择</p>
-            <h2>你现在最需要解决哪一个问题，就只买哪一节。</h2>
-            <p class="lead">可以先看上面的免费《问题解决流程》，了解我的讲课方式和方法质量。付费课不捆绑销售：上课困，就选早起与课堂清醒；考试经常写不完，就选考试做卷课。</p>
-            <p class="course-choice-note">不需要两节一起买。先解决眼前最影响分数和状态的问题。</p>
+            <p class="kicker">课程与上线进度</p>
+            <h2>哪一个问题最影响你，就先解决哪一个。</h2>
+            <p class="lead">早起课和考试做卷课已经可以交付；《如何科学有效地复习》正在录制。三节课解决的是三类不同问题，不需要一次全买。</p>
+            <p class="course-choice-note">先看自己卡在状态、考场时间，还是学过以后总忘。选错问题，比暂时不买更浪费时间。</p>
           </div>
 
           <div class="paid-course-grid">
-          <div class="course-panel">
-            <span class="course-label">状态问题</span>
-            <h3>早起与课堂清醒</h3>
-            <div class="price">¥9.9</div>
-            <p>适合：早上起不来、第一节课困、晚上补作业越补越晚的同学。</p>
-            <p>购买后，我会在微信私信发送飞书课程链接，可以随时回看。</p>
-            <div class="course-outline" aria-label="课程框架">
-              <div><strong>01</strong><span>为什么越努力越困：白天低效、晚上补作业、第二天更困的恶性循环。</span></div>
-              <div><strong>02</strong><span>先把睡眠稳下来：作息、环境和身体状态如何影响第二天的清醒度。</span></div>
-              <div><strong>03</strong><span>如何早起：凉水法、自动化晨间流程，减少早晨反复做决定。</span></div>
-              <div><strong>04</strong><span>如何不因为失败放弃：三条命法和烂开始法，先不断，再加量。</span></div>
+            <div class="course-panel">
+              <span class="course-label">状态问题｜已上线</span>
+              <h3>早起与课堂清醒</h3>
+              <div class="price-offer">
+                <span class="price-current">¥9.9</span>
+              </div>
+              <p>适合：早上起不来、第一节课困、晚上补作业越补越晚，已经掉进恶性循环的同学。</p>
+              <div class="course-outline" aria-label="早起课课程框架">
+                <div><strong>01</strong><span>看懂白天低效、晚上熬夜、第二天更困的循环。</span></div>
+                <div><strong>02</strong><span>从睡眠、环境和身体状态入手，让第二天先清醒起来。</span></div>
+                <div><strong>03</strong><span>用凉水法和自动化晨间流程，减少早晨反复挣扎。</span></div>
+                <div><strong>04</strong><span>用三条命法和烂开始法，避免一次失败就彻底放弃。</span></div>
+              </div>
+              <p class="purchase-note">交付：确认适合后付款，发送飞书课程链接，可回看。</p>
+              <div class="actions">
+                <a class="btn primary" href="#contact" data-track="wake-course-detail">查看获取方式</a>
+              </div>
             </div>
-            <p class="purchase-note">想购买或先问课程是否适合自己：加微信私信说明情况，确认后付款，我会发送飞书课程链接。</p>
-            <div class="actions">
-              <a class="btn primary" href="#wechat-qr">加微信购买 / 咨询</a>
-            </div>
-          </div>
 
-          <div class="course-panel">
-            <span class="course-label">考试问题｜本周主推</span>
-            <h3>考试写不完怎么办——把会做的分拿回来</h3>
-            <div class="price-offer">
-              <span class="price-current">¥39.9</span>
-              <span class="price-future">首批结束后调整为 ¥69.9</span>
+            <div class="course-panel">
+              <span class="course-label">考场时间问题｜已上线</span>
+              <h3>考试写不完怎么办——把会做的分拿回来</h3>
+              <div class="price-offer">
+                <span class="price-current">¥19.9</span>
+              </div>
+              <p>适合：数学或理综经常写不完、一道题卡太久、后面会做的题却只能空着的同学。</p>
+              <p>不适合：主要问题是基础知识大面积空缺，或还没有完成一次完整的常规复习。课程不能替代基础重建。</p>
+              <div class="course-outline" aria-label="考试课课程框架">
+                <div><strong>01</strong><span>分清“真的不会”和“给时间就会”，先找出最可惜的失分。</span></div>
+                <div><strong>02</strong><span>众题平等与主动跳题：不让题号和沉没成本控制整张卷。</span></div>
+                <div><strong>03</strong><span>建立数学时间阈值和卡题体感，给每道题设置明确出口。</span></div>
+                <div><strong>04</strong><span>三轮做卷：第一遍扫荡，第二遍挑软柿子，第三遍抢边际分。</span></div>
+                <div><strong>05</strong><span>用 30 天训练，把策略练成考场上的自动反应。</span></div>
+              </div>
+              <p class="purchase-note">交付：确认适合后付款，发送飞书课程链接，可回看。课程讲考场时间与做卷策略，不承诺具体提分结果。</p>
+              <div class="actions">
+                <a class="btn primary" href="#contact" data-track="exam-course-detail">查看获取方式</a>
+              </div>
             </div>
-            <p class="offer-limit">新课首发体验价｜首批 10 名</p>
-            <p>适合：数学或理综经常写不完、一道题卡太久、后面会做的题却只能空着的同学。</p>
-            <p>购买后，我会在微信私信发送飞书课程链接，可以随时回看。</p>
-            <div class="course-outline" aria-label="考试课课程框架">
-              <div><strong>01</strong><span>分清“真的不会”和“给时间就会”，先找出最可惜的失分。</span></div>
-              <div><strong>02</strong><span>众题平等与主动跳题：不让题号和沉没成本控制整张卷。</span></div>
-              <div><strong>03</strong><span>建立数学时间阈值和卡题体感，给每道题设置明确出口。</span></div>
-              <div><strong>04</strong><span>三轮做卷：第一遍扫荡，第二遍挑软柿子，第三遍抢边际分。</span></div>
-              <div><strong>05</strong><span>用 30 天训练，把策略练成考场上的自动反应。</span></div>
+
+            <div class="course-panel upcoming">
+              <span class="course-label recording">复习问题｜录制中</span>
+              <h3>如何科学有效地复习</h3>
+              <p class="course-status">即将上线 · 暂未开放购买</p>
+              <p>适合：一轮复习一直往前赶，学过的内容看着眼熟，到了考试却想不起来的同学。</p>
+              <div class="course-outline" aria-label="复习课课程框架">
+                <div><strong>01</strong><span>先筛出真正值得反复复习的内容，不把所有资料重新看一遍。</span></div>
+                <div><strong>02</strong><span>用遗忘管理表安排第 1、2、4、7、14、21、30 天回看。</span></div>
+                <div><strong>03</strong><span>前期熟悉，后期遮住资料检测；忘掉的内容重新标记、再次进入复习。</span></div>
+                <div><strong>04</strong><span>任务撞在同一天时，按间隔和掌握情况减量，不让表格把自己拖垮。</span></div>
+              </div>
+              <p class="purchase-note">课程录制与交付检查完成后再开放获取，价格届时公布。</p>
             </div>
-            <p class="purchase-note">想购买或先判断课程是否适合自己：加微信发送“考试写不完”，说明年级、科目和通常空多少分。</p>
-            <div class="actions">
-              <a class="btn primary" href="#wechat-qr">加微信购买 / 咨询</a>
-            </div>
-          </div>
           </div>
         </div>
       </section>
 
       <section class="section">
         <div class="wrap">
-          <p class="kicker">后续课程预告</p>
-          <h2>后面继续解决错题、遗忘、时间管理和各科方法。</h2>
-          <p class="lead">课程不会一次性堆很多，而是围绕一个具体问题逐节上线。先用免费课学会分析问题，再按自己的真实需要选择对应课程。</p>
+          <p class="kicker">后续课程</p>
+          <h2>接下来会继续讲时间管理和错题处理。</h2>
+          <p class="lead">包括如何从一天里挤出零碎时间，以及错题究竟怎么筛、怎么整理、怎么重新训练。完成录制和交付检查后再上线。</p>
         </div>
       </section>
 
       <section class="section" id="contact">
         <div class="wrap">
-          <p class="kicker">微信承接</p>
-          <h2>前 20 名领取问题反馈表，我可以免费帮你做一次问题诊断。</h2>
+          <p class="kicker">问题反馈</p>
+          <h2>如果想进一步判断自己的问题，先把情况写清楚。</h2>
           <div class="qr-layout">
             <div>
-              <p class="lead">如果你说不清自己到底卡在哪里，可以先加微信领取问题反馈表。表里会让你写清：目标、具体问题、原因分析、尝试过的方法、三条策略、执行结果和后续反馈。</p>
-              <p class="lead">前 20 名把表格认真填完发给我，我可以免费帮你看一次：你真正的问题在哪里，下一步更适合先解决什么。</p>
+              <p class="lead">可以先写：年级、科目、最具体的一次卡住的场景、已经试过什么。想了解课程时，也可以直接说明“早起”“考试写不完”或“复习”。</p>
+              <p class="lead">早起课和考试做卷课可以正常获取；复习课目前只登记需求，录制完成前不收款。</p>
               <div class="actions">
-                <a class="btn primary" href="wechat-qr.jpg">查看微信二维码</a>
+                <a class="btn primary" href="wechat-qr.jpg" data-track="contact-qr">查看联系二维码</a>
               </div>
-              <p class="fineprint">如果免费视频在手机上加载慢，直接加微信也可以领取备用观看方式。免费课结尾同样有这个二维码。</p>
-              <p class="fineprint">免费诊断限定为一次问题诊断，不承诺长期陪跑，也不承诺保证提分。</p>
+              <p class="fineprint">这里用于沟通课程获取和具体问题，不承诺长期陪跑，也不承诺保证提分。</p>
             </div>
             <div class="qr" id="wechat-qr">
               <img src="wechat-qr.jpg" alt="微信二维码">
@@ -916,26 +987,73 @@
 
     <footer>
       <div class="wrap">
-        <p>本页面为本地 MVP 承接页。所有课程以真实经历和方法拆解为主，不虚构身份，不承诺保证提分。</p>
+        <p>所有内容以真实经历和方法拆解为主。个人经历不代表任何人的必然结果；不承诺保证提分。</p>
       </div>
     </footer>
   </div>
   <script>
     (function () {
-      if (navigator.doNotTrack === "1") return;
+      var endpoint = "https://gaokao-nixi-system.mjwnq65vwk.chatgpt.site/api/page-view";
+      var sent = false;
 
-      window.addEventListener("load", function () {
-        fetch("https://gaokao-nixi-system.mjwnq65vwk.chatgpt.site/api/analytics/track", {
+      function reportPageView() {
+        if (sent) return;
+        sent = true;
+        var payload = JSON.stringify({
+          path: "github-pages:" + location.pathname + location.search,
+          referrer: document.referrer || ""
+        });
+
+        try {
+          if (navigator.sendBeacon) {
+            var queued = navigator.sendBeacon(
+              endpoint,
+              new Blob([payload], { type: "text/plain;charset=UTF-8" })
+            );
+            if (queued) return;
+          }
+        } catch (error) {}
+
+        fetch(endpoint, {
           method: "POST",
           mode: "no-cors",
           credentials: "omit",
           headers: { "content-type": "text/plain;charset=UTF-8" },
-          body: JSON.stringify({
-            path: "github-pages:" + location.pathname + location.search,
-            referrer: document.referrer || ""
-          }),
+          body: payload,
           keepalive: true
         }).catch(function () {});
+      }
+
+      function reportEvent(name) {
+        var payload = JSON.stringify({
+          path: "github-pages:event:" + name + ":" + location.pathname + location.search,
+          referrer: document.referrer || ""
+        });
+        try {
+          if (navigator.sendBeacon && navigator.sendBeacon(
+            endpoint,
+            new Blob([payload], { type: "text/plain;charset=UTF-8" })
+          )) return;
+        } catch (error) {}
+        fetch(endpoint, {
+          method: "POST",
+          mode: "no-cors",
+          credentials: "omit",
+          headers: { "content-type": "text/plain;charset=UTF-8" },
+          body: payload,
+          keepalive: true
+        }).catch(function () {});
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", reportPageView, { once: true });
+      } else {
+        reportPageView();
+      }
+
+      document.addEventListener("click", function (event) {
+        var target = event.target.closest("[data-track]");
+        if (target) reportEvent(target.getAttribute("data-track"));
       });
     })();
   </script>
