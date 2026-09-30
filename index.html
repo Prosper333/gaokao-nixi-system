@@ -399,19 +399,19 @@
       font-weight: 900;
     }
 
-    .course-label.recording {
+    .course-label.featured {
       border-color: rgba(143, 29, 24, .72);
       color: #ffd7d2;
       background: rgba(143, 29, 24, .32);
     }
 
-    .course-panel.upcoming {
+    .course-panel.featured {
       grid-column: 1 / -1;
       border-color: rgba(215, 173, 103, .42);
       background: linear-gradient(180deg, rgba(215, 173, 103, .12), rgba(17, 20, 18, .98));
     }
 
-    .course-panel.upcoming .course-outline {
+    .course-panel.featured .course-outline {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       column-gap: 22px;
     }
@@ -575,8 +575,8 @@
         grid-template-columns: 1fr;
       }
 
-      .course-panel.upcoming { grid-column: auto; }
-      .course-panel.upcoming .course-outline { grid-template-columns: 1fr; }
+      .course-panel.featured { grid-column: auto; }
+      .course-panel.featured .course-outline { grid-template-columns: 1fr; }
       .cards-3,
       .cards-4,
       .course-map,
@@ -827,7 +827,7 @@
             <div class="map-card">
               <h3>复习与遗忘系统</h3>
               <ul>
-                <li>《如何科学有效地复习》正在录制</li>
+                <li>《如何科学有效地复习》已上线</li>
                 <li>用遗忘管理表安排长期回看</li>
                 <li>学会筛选、复习、检测与减量</li>
               </ul>
@@ -895,7 +895,7 @@
           <div class="course-choice">
             <p class="kicker">课程与上线进度</p>
             <h2>哪一个问题最影响你，就先解决哪一个。</h2>
-            <p class="lead">早起课和考试做卷课已经可以交付；《如何科学有效地复习》正在录制。三节课解决的是三类不同问题，不需要一次全买。</p>
+            <p class="lead">早起课、考试做卷课和《如何科学有效地复习》都已经可以交付。三节课解决的是三类不同问题，不需要一次全买。</p>
             <p class="course-choice-note">先看自己卡在状态、考场时间，还是学过以后总忘。选错问题，比暂时不买更浪费时间。</p>
           </div>
 
@@ -940,10 +940,13 @@
               </div>
             </div>
 
-            <div class="course-panel upcoming">
-              <span class="course-label recording">复习问题｜录制中</span>
+            <div class="course-panel featured">
+              <span class="course-label featured">复习问题｜已上线</span>
               <h3>如何科学有效地复习</h3>
-              <p class="course-status">即将上线 · 暂未开放购买</p>
+              <div class="price-offer">
+                <span class="price-current">¥19.9</span>
+              </div>
+              <p class="course-status">一杯奶茶的钱，学会一套能一直用到高考的复习方法。</p>
               <p>适合：一轮复习一直往前赶，学过的内容看着眼熟，到了考试却想不起来的同学。</p>
               <div class="course-outline" aria-label="复习课课程框架">
                 <div><strong>01</strong><span>先筛出真正值得反复复习的内容，不把所有资料重新看一遍。</span></div>
@@ -951,7 +954,10 @@
                 <div><strong>03</strong><span>前期熟悉，后期遮住资料检测；忘掉的内容重新标记、再次进入复习。</span></div>
                 <div><strong>04</strong><span>任务撞在同一天时，按间隔和掌握情况减量，不让表格把自己拖垮。</span></div>
               </div>
-              <p class="purchase-note">课程录制与交付检查完成后再开放获取，价格届时公布。</p>
+              <p class="purchase-note">获取方式：加微信说明“复习课”，确认后付款，我会把课程视频发给你。</p>
+              <div class="actions">
+                <a class="btn primary" href="#contact" data-track="review-course-detail">加微信获取课程</a>
+              </div>
             </div>
           </div>
         </div>
@@ -972,7 +978,7 @@
           <div class="qr-layout">
             <div>
               <p class="lead">可以先写：年级、科目、最具体的一次卡住的场景、已经试过什么。想了解课程时，也可以直接说明“早起”“考试写不完”或“复习”。</p>
-              <p class="lead">早起课和考试做卷课可以正常获取；复习课目前只登记需求，录制完成前不收款。</p>
+              <p class="lead">三节课程都可以正常获取。复习课请直接说明“复习课”，确认后付款，我会把课程视频发给你。</p>
               <div class="actions">
                 <a class="btn primary" href="wechat-qr.jpg" data-track="contact-qr">查看联系二维码</a>
               </div>
